@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Abate 🌙</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Beautiful Google Fonts for elegant headers & handwritten text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Animated Starry Night Background -->
+    <canvas id="starsCanvas"></canvas>
+
+    <!-- Screen 1: Opening Screen (Surprise Reveal) -->
+    <div id="welcomeScreen" class="screen active">
+        <div class="welcome-content">
+            <div class="mini-moon">🌙</div>
+            <h1 class="glow-text">A little surprise for you, Abate 🌙✨</h1>
+            <button id="openBtn" class="reveal-btn">Open your surprise ⭐</button>
+        </div>
+    </div>
+
+    <!-- Screen 2: Main Birthday Page -->
+    <div id="mainScreen" class="screen hidden">
+        
+        <!-- Optional Audio Element -->
+        <audio id="bgMusic" loop>
+            <source src="assets/audio/song.mp3" type="audio/mpeg">
+        </audio>
+        
+        <!-- Elegant Play/Pause Control -->
+        <button id="musicBtn" class="music-btn">🎵 Play Music</button>
+
+        <header class="main-header">
+            <div class="giant-moon">🌙</div>
+            <h1 class="main-title">Happy Birthday Abate 🎂</h1>
+        </header>
+
+        <main class="content-container">
+            <!-- Card 1: Handwritten Style Letter -->
+            <section class="glass-card letter-card">
+                <p class="letter-text">
+                    May your days be filled with happiness, success, and beautiful moments. Keep shining like the stars above. ✨
+                </p>
+            </section>
+
+            <!-- Card 2: Memory / Feelings Card -->
+            <section class="glass-card wish-card">
+                <h2 class="card-title">Tonight's wish for you 🌙</h2>
+                <p class="wish-text">
+                    May this new year of your life bring you peace, dreams coming true, and endless reasons to smile.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

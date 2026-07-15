@@ -3,59 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Abate 🌙</title>
+    <title>The Birthday Journey 🌙</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Beautiful Google Fonts for elegant headers & handwritten text -->
+    <!-- Google Fonts for handwriting, titles, and body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Animated Starry Night Background -->
-    <canvas id="starsCanvas"></canvas>
+    <!-- Canvas for stars, cursor sparkles, fireflies, and heart bursts -->
+    <canvas id="effectsCanvas"></canvas>
 
-    <!-- Screen 1: Opening Screen (Surprise Reveal) -->
-    <div id="welcomeScreen" class="screen active">
-        <div class="welcome-content">
-            <div class="mini-moon">🌙</div>
-            <h1 class="glow-text">A little surprise for you, Abate 🌙✨</h1>
-            <button id="openBtn" class="reveal-btn">Open your surprise ⭐</button>
-        </div>
-    </div>
+    <!-- Background Audio (Classical Birthday Theme) -->
+    <audio id="bgMusic" loop>
+        <source src="birthday-theme.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- Screen 2: Main Birthday Page -->
-    <div id="mainScreen" class="screen hidden">
-        
-        <!-- Optional Audio Element -->
-        <audio id="bgMusic" loop>
-            <source src="assets/audio/song.mp3" type="audio/mpeg">
-        </audio>
-        
-        <!-- Elegant Play/Pause Control -->
-        <button id="musicBtn" class="music-btn">🎵 Play Music</button>
+    <!-- JOURNEY CONTAINER -->
+    <div id="journeyContainer">
 
-        <header class="main-header">
-            <div class="giant-moon">🌙</div>
-            <h1 class="main-title">Happy Birthday Abate 🎂</h1>
-        </header>
+        <!-- STEP 1: Welcome Screen -->
+        <section id="step-welcome" class="journey-step active">
+            <div class="step-content text-center">
+                <div class="mini-moon animate-float">🌙</div>
+                <h1 class="glow-text font-serif">Hi... Someone has been waiting for you.</h1>
+                <button id="btn-begin" class="elegant-btn">Begin ✨</button>
+            </div>
+        </section>
 
-        <main class="content-container">
-            <!-- Card 1: Handwritten Style Letter -->
-            <section class="glass-card letter-card">
-                <p class="letter-text">
-                    May your days be filled with happiness, success, and beautiful moments. Keep shining like the stars above. ✨
+        <!-- STEP 2: Name Check -->
+        <section id="step-namecheck" class="journey-step hidden">
+            <div class="step-content text-center">
+                <h2 class="prompt-text font-serif">What's your name?</h2>
+                <div class="input-container">
+                    <input type="text" id="name-input" placeholder="Enter your name here..." autocomplete="off">
+                    <button id="btn-submit-name" class="elegant-btn">Enter 🌸</button>
+                </div>
+                <p id="name-error" class="error-text hidden">Please enter your correct name 🤍</p>
+            </div>
+        </section>
+
+        <!-- STEP 3: Surprise Reveal -->
+        <section id="step-surprise" class="journey-step hidden">
+            <div class="step-content text-center">
+                <h1 class="surprise-title animate-pop">Happy Birthday, Kiya ❤️</h1>
+                <p class="surprise-sub font-serif animate-fade-delayed">
+                    "Today isn't just another day.<br>It's the day someone incredibly special came into the world."
                 </p>
-            </section>
+                <button id="btn-to-garden" class="elegant-btn animate-fade-delayed">Continue the journey 🌿</button>
+            </div>
+        </section>
 
-            <!-- Card 2: Memory / Feelings Card -->
-            <section class="glass-card wish-card">
-                <h2 class="card-title">Tonight's wish for you 🌙</h2>
-                <p class="wish-text">
-                    May this new year of your life bring you peace, dreams coming true, and endless reasons to smile.
-                </p>
-            </section>
-        </main>
+        <!-- STEP 4: Main Interactive Journey (Scrollable) -->
+        <section id="step-main-scroller" class="journey-step hidden scrollable-step">
+            
+            <!-- Spinning Vinyl Record Button -->
+            <div class="music-player-container">
+                <div id="vinyl-record" class="vinyl"></div>
+                <button id="btn-music-toggle" class="music-control-btn">▶ Play music</button>
+            </div>
+
+            <div class="scroller-inner">
+                
+                <!-- 4A. Flower Garden Section -->
+                <div class="journey-section" id="section-garden">
+                    <h2 class="section-title font-serif">🌸 The Flower Garden</h2>
+                    <p class="section-subtitle">Scroll down and watch the flowers bloom... Tap them to read their hidden notes.</p>
+                    
+                    <div class="garden-grid">
+                        <div class="flower-container" data-message="You make me feel safe.">
+                            <div class="flower-stem"></div>
+                            <div class="flower-head rose">🌹</div>
+                            <div class="flower-note">Tap me</div>
+                        </div>
+                        <div class="flower-container" data-message="Thank you for existing.">
+                            <div class="flower-stem"></div>
+                            <div class="flower-head tulip">🌷</div>
+                            <div class="flower-note">Tap me</div>
+                        </div>
+                        <div class="flower-container" data-message="I'm proud of you.">
+                            <div class="flower-stem"></div>
+                            <div class="flower-head daisy">🌼</div>
+                            <div class="flower-note">Tap me</div>
+                        </div>
+                        <div class="flower-container" data-message="Keep smiling.">
+                            <div class="flower-stem"></div>
+                            <div class="flower-head blossom">🌸</div>
+                            <div class="flower-note">Tap me</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Message Display Overlay for Flowers -->
+                    <div id="flower-message-box" class="glass-message hidden">
+                        <span class="close-msg">&times;</span>
+                        <p id="flower-message-text"></p>
+                    </div>
+                </div>
+
+                <!-- 4B. Interactive Birthday Cake -->
+                <div class="journey-section" id="section-cake">
+                    <h2 class="section-title font-serif">🎂 Make a Wish</h2>
+                    <p class="section-subtitle">Click or tap the candles to blow them out.</p>
+                    <div class="cake-container">
+                        <div class="cake">
+                            <div class="candle active" id="candle-1">
+                                <div class="flame"></div>
+                            </div>
+                            <div class="candle active" id="candle-2">
+                                <div class="flame"></div>
+                            </div>
+                            <div class="candle active" id="candle-3">
+                                <div class="flame"></div>
+                            </div>
+                            <div class="cake-top"></div>
+                            <div class="cake-middle"></div>
+                            <div class="cake-bottom"></div>
+                        </div>
+                    </div>
+                    <p id="cake-wish-prompt" class="wish-prompt hidden font-serif">Make your silent wish now... 🌙</p>
+                </div>
+
+                <!-- 4C. Sealed Letter Section -->
+                <div class="journey-section" id="section-letter">
+                    <h2 class="section-title font-serif">💌 A Message For You</h2>
+                    <p class="section-subtitle">Tap the envelope to open it.</p>
+                    
+                    <div class="letter-wrapper">
+                        <div class="envelope" id="envelope-btn">
+                            <div class="flap"></div>
+                            <div class="pocket"></div>
+                            <div class="seal">❤️</div>
+                        </div>
+                        
+                        <div class="letter-paper hidden" id="letter-paper">
+                            <span class="close-letter" id="close-letter-btn">&times;</span>
+                            <div class="letter-content">
+                                <p class="letter-header">Happy Birthday, my love.</p>
+                                <p>There are people who come into our lives and leave footprints, and then there are people who quietly become a part of our hearts without even trying. You're one of those people.</p>
+                                <p>Meeting you has been one of the greatest gifts life has given me. Thank you for your kindness, your patience, your laughter, and for simply being yourself. Every little moment we've shared has become a memory I treasure more than you probably know.</p>
+                                <p>On your birthday, I don't just wish you happiness today—I wish you a lifetime filled with peace, success, adventures that excite you, dreams that come true, and people who love you the way you deserve to be loved.</p>
+                                <p>I hope this new year of your life brings you opportunities you've been waiting for, moments that make you laugh until your stomach hurts, and quiet days where you feel truly content.</p>
+                                <p>If I could wrap one thing and give it to you today, it would be the ability to see yourself through my eyes. Then you'd understand just how incredible, kind, and special you really are.</p>
+                                <p>Thank you for making my world brighter simply by being in it.</p>
+                                <p class="letter-footer">Happy Birthday, Kiya.<br>I love you with all my heart.<br><span class="red-heart">❤️</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4D. Memory Sky Section -->
+                <div class="journey-section" id="section-sky">
+                    <h2 class="section-title font-serif">⭐ Memory Sky</h2>
+                    <p class="section-subtitle">Click on the glowing stars to reveal beautiful thoughts.</p>
+                    <div class="interactive-sky">
+                        <div class="sky-star" data-thought="My favorite hello.">⭐</div>
+                        <div class="sky-star" data-thought="My safe place.">⭐</div>
+                        <div class="sky-star" data-thought="My happiness.">⭐</div>
+                        <div class="sky-star" data-thought="My favorite person.">⭐</div>
+                    </div>
+                    <!-- Message Display Overlay for Sky Stars -->
+                    <div id="sky-message-box" class="glass-message hidden">
+                        <span class="close-msg-sky">&times;</span>
+                        <p id="sky-message-text"></p>
+                    </div>
+                </div>
+
+                <!-- 4E. Interactive Hug Button -->
+                <div class="journey-section text-center" id="section-hug">
+                    <button id="btn-send-hug" class="hug-btn">💌 Send me a hug</button>
+                </div>
+
+                <!-- Trigger for the Final Screen -->
+                <div class="next-step-trigger-wrapper">
+                    <button id="btn-to-gift" class="elegant-btn">Look Closer ⭐</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 5: Final Gift Screen -->
+        <section id="step-gift" class="journey-step hidden">
+            <div class="step-content text-center">
+                <div id="gift-box-container" class="gift-container">
+                    <div class="gift-box" id="gift-box-btn">
+                        <div class="gift-lid"></div>
+                        <div class="gift-body"></div>
+                        <div class="gift-bow">🎁</div>
+                    </div>
+                    <p id="gift-prompt" class="gift-label font-serif">Open me 🎁</p>
+                </div>
+                
+                <!-- Sequential fading text containers -->
+                <div id="love-messages" class="hidden">
+                    <h2 class="fade-word" id="word-choose">"I choose you."</h2>
+                    <h2 class="fade-word" id="word-again">"Again."</h2>
+                    <h2 class="fade-word" id="word-tomorrow">"Tomorrow."</h2>
+                    <h2 class="fade-word" id="word-always">"Always." <span class="red-heart">❤️</span></h2>
+                </div>
+                
+                <button id="btn-to-ending" class="elegant-btn hidden">🤍</button>
+            </div>
+        </section>
+
+        <!-- STEP 6: Final End Card Screen -->
+        <section id="step-ending" class="journey-step hidden">
+            <div class="step-content text-center">
+                <div class="final-letter animate-float">
+                    <h1 class="final-title font-serif">Thank you for existing.</h1>
+                    <h2 class="final-sub font-serif">Happy Birthday, Kiya.</h2>
+                    <p class="final-signature font-serif">— Love, Sunny ❤️</p>
+                </div>
+            </div>
+        </section>
+
     </div>
 
     <script src="script.js"></script>

@@ -1,834 +1,507 @@
-/* Core Styling Rules & Color Palette */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-}
-
-body {
-    background-color: #0b0b0f;
-    color: #dfdfe6;
-    font-family: 'Montserrat', sans-serif;
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-}
-
-/* Base Fonts & Typography */
-.font-serif {
-    font-family: 'Playfair Display', serif;
-}
-
-/* Canvas layered fully behind interactions */
-#effectsCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Journey Layout Container */
-#journeyContainer {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-}
-
-/* Screens Structure */
-.journey-step {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1.5s ease;
-}
-
-.journey-step.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.journey-step.hidden {
-    display: none !important;
-}
-
-/* Scrollable main view layout */
-.scrollable-step {
-    overflow-y: auto;
-    display: block;
-}
-
-.scroller-inner {
-    max-width: 650px;
-    margin: 0 auto;
-    padding: 100px 16px 120px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 120px;
-}
-
-.journey-section {
-    width: 100%;
-    text-align: center;
-    opacity: 0.2;
-    transform: translateY(30px);
-    transition: opacity 1.2s ease, transform 1.2s ease;
-}
-
-.journey-section.appeared {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.text-center {
-    text-align: center;
-}
-
-/* Headings and fonts styling */
-.section-title {
-    font-size: 2.2rem;
-    font-weight: 400;
-    color: #f0f0f5;
-    margin-bottom: 12px;
-    letter-spacing: 1.5px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-.section-subtitle {
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: #9a9ab0;
-    margin-bottom: 40px;
-    letter-spacing: 1px;
-}
-
-/* Elegant glass buttons */
-.elegant-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #f0f0f5;
-    padding: 14px 30px;
-    font-size: 0.95rem;
-    letter-spacing: 1.5px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.elegant-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-/* Glassmorphic cards */
-.glass-message {
-    background: rgba(20, 20, 25, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 24px;
-    margin: 24px auto 0 auto;
-    max-width: 450px;
-    position: relative;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    animation: fadeIn 0.5s ease forwards;
-}
-
-.close-msg, .close-msg-sky {
-    position: absolute;
-    top: 8px;
-    right: 14px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #9a9ab0;
-    transition: color 0.3s;
-}
-
-.close-msg:hover, .close-msg-sky:hover {
-    color: #ffffff;
-}
-
-/* Welcome Reveal screen objects */
-.mini-moon {
-    font-size: 4rem;
-    margin-bottom: 24px;
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
-}
-
-.glow-text {
-    font-size: 1.8rem;
-    font-weight: 300;
-    margin-bottom: 40px;
-    line-height: 1.5;
-    color: #f0f0f5;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.35);
-}
-
-/* Name check stage */
-.prompt-text {
-    font-size: 2.2rem;
-    font-weight: 300;
-    margin-bottom: 30px;
-    color: #f0f0f5;
-}
-
-.input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-#name-input {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 14px 24px;
-    font-size: 1.1rem;
-    color: #ffffff;
-    border-radius: 50px;
-    outline: none;
-    text-align: center;
-    width: 260px;
-    transition: all 0.3s;
-}
-
-#name-input:focus {
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.08);
-}
-
-.error-text {
-    color: #ff5e7e;
-    margin-top: 15px;
-    font-size: 0.9rem;
-}
-
-/* Surprise Screen */
-.surprise-title {
-    font-size: 3rem;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 20px;
-    text-shadow: 0 0 20px rgba(255, 94, 126, 0.4);
-}
-
-.surprise-sub {
-    font-size: 1.3rem;
-    line-height: 1.8;
-    color: #cccccc;
-    margin-bottom: 45px;
-}
-
-/* Interactive Vinyl record controls */
-.music-player-container {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(15, 15, 20, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 8px 18px;
-    border-radius: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.vinyl {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #242424 30%, #0d0d0d 31%, #2c2c2c 60%, #000000 61%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    position: relative;
-    animation: rotateVinyl 3s linear infinite paused;
-}
-
-.vinyl.playing {
-    animation-play-state: running;
-}
-
-.vinyl::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #0b0b0f;
-}
-
-.music-control-btn {
-    background: none;
-    border: none;
-    color: #cccccc;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    outline: none;
-    transition: color 0.3s;
-}
-
-.music-control-btn:hover {
-    color: #ffffff;
-}
-
-/* Flower Garden Section style */
-.garden-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    justify-items: center;
-    margin-bottom: 30px;
-}
-
-.flower-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    width: 100px;
-}
-
-.flower-head {
-    font-size: 3rem;
-    position: relative;
-    z-index: 2;
-    transition: transform 0.5s ease;
-    filter: grayscale(100%) opacity(0.3);
-}
-
-.flower-container.bloomed .flower-head {
-    filter: grayscale(0%) opacity(1);
-    transform: scale(1.1) rotate(5deg);
-    animation: sway 3s ease-in-out infinite alternate;
-}
-
-.flower-stem {
-    width: 4px;
-    height: 0px;
-    background: linear-gradient(to top, #2e4d2e, #4a7c4a);
-    transition: height 1.5s ease;
-    border-radius: 2px;
-    margin-top: -5px;
-}
-
-.flower-container.bloomed .flower-stem {
-    height: 80px;
-}
-
-.flower-note {
-    font-size: 0.75rem;
-    color: #7d7d96;
-    margin-top: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-
-.flower-container.bloomed .flower-note {
-    opacity: 1;
-}
-
-/* Interactive Birthday Cake Styles */
-.cake-container {
-    position: relative;
-    height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    margin-bottom: 24px;
-}
-
-.cake {
-    position: relative;
-    width: 160px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.cake-top, .cake-middle, .cake-bottom {
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-.cake-top {
-    width: 90px;
-    height: 35px;
-    background: #6a6a75;
-    border-bottom: 4px solid #4a4a52;
-}
-
-.cake-middle {
-    width: 125px;
-    height: 40px;
-    background: #4a4a52;
-    border-bottom: 4px solid #333338;
-}
-
-.cake-bottom {
-    width: 160px;
-    height: 45px;
-    background: #333338;
-    border-bottom: 4px solid #222226;
-}
-
-/* Cake candles and flame interaction */
-.candle {
-    position: absolute;
-    width: 6px;
-    height: 35px;
-    background: repeating-linear-gradient(45deg, #dfdfe6, #dfdfe6 4px, #a3a3b3 4px, #a3a3b3 8px);
-    z-index: 5;
-    bottom: 120px;
-    cursor: pointer;
-}
-
-#candle-1 { left: 45px; }
-#candle-2 { left: 77px; }
-#candle-3 { left: 109px; }
-
-.flame {
-    width: 10px;
-    height: 14px;
-    background: radial-gradient(circle at bottom, #ff9e00 20%, #ff5e00 80%);
-    border-radius: 50% 50% 20% 20%;
-    position: absolute;
-    top: -14px;
-    left: -2px;
-    box-shadow: 0 0 10px rgba(255, 158, 0, 0.6);
-    animation: flameFlicker 0.15s ease infinite alternate;
-}
-
-.candle.blown-out .flame {
-    display: none;
-}
-
-.wish-prompt {
-    font-size: 1.2rem;
-    color: #e5e5eb;
-    margin-top: 15px;
-    animation: fadeIn 1.2s ease forwards;
-}
-
-/* Memory Sky stars structure */
-.interactive-sky {
-    position: relative;
-    height: 150px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.sky-star {
-    font-size: 2rem;
-    cursor: pointer;
-    transition: transform 0.3s, text-shadow 0.3s;
-    filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
-}
-
-.sky-star:hover {
-    transform: scale(1.3) rotate(15deg);
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-}
-
-/* Interactive letter interface */
-.letter-wrapper {
-    position: relative;
-    width: 100%;
-    min-height: 220px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Sealed Letter Envelope style */
-.envelope {
-    position: relative;
-    width: 180px;
-    height: 110px;
-    background: #333338;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    cursor: pointer;
-    transition: transform 0.4s;
-    z-index: 5;
-}
-
-.envelope:hover {
-    transform: scale(1.05) translateY(-5px);
-}
-
-.flap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 90px solid transparent;
-    border-right: 90px solid transparent;
-    border-top: 55px solid #4a4a52;
-    transform-origin: top;
-    transition: transform 0.4s ease 0.2s;
-    z-index: 6;
-}
-
-.envelope:hover .flap {
-    transform: rotateX(180deg);
-}
-
-.pocket {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-left: 90px solid #2b2b30;
-    border-right: 90px solid #2b2b30;
-    border-bottom: 55px solid #28282d;
-    border-radius: 0 0 8px 8px;
-    z-index: 7;
-}
-
-.seal {
-    position: absolute;
-    top: 45px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 8;
-    font-size: 1.5rem;
-    transition: transform 0.4s;
-}
-
-.envelope:hover .seal {
-    transform: translateX(-50%) scale(0);
-}
-
-/* Elegant unfolding written letter paper */
-.letter-paper {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    max-width: 500px;
-    background: #dfdfe6;
-    color: #1a1a24;
-    border-radius: 8px;
-    padding: 35px 25px 25px 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 20;
-    text-align: left;
-    max-height: 480px;
-    overflow-y: auto;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    transform: scale(0.9) translateY(50px);
-    opacity: 0;
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s;
-}
-
-.letter-paper.open {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-}
-
-.close-letter {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: #55555e;
-    transition: color 0.3s;
-}
-
-.close-letter:hover {
-    color: #000000;
-}
-
-.letter-content {
-    line-height: 1.7;
-    font-size: 1.05rem;
-}
-
-.letter-content p {
-    margin-bottom: 18px;
-}
-
-.letter-header {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 24px !important;
-}
-
-.letter-footer {
-    margin-top: 30px;
-    text-align: right;
-    line-height: 1.5;
-}
-
-.red-heart {
-    color: #ff3e60;
-}
-
-/* Interactive Hug Button style */
-.hug-btn {
-    background: rgba(255, 94, 126, 0.1);
-    border: 1px solid rgba(255, 94, 126, 0.3);
-    color: #ffccd5;
-    padding: 12px 28px;
-    font-size: 0.9rem;
-    border-radius: 50px;
-    cursor: pointer;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    transition: all 0.3s;
-}
-
-.hug-btn:hover {
-    background: rgba(255, 94, 126, 0.25);
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 94, 126, 0.3);
-}
-
-/* Global viewport heartbeat pulsing animation */
-.heartbeat-active {
-    animation: globalHeartbeat 0.8s ease;
-}
-
-/* Gift reveal mechanics */
-.gift-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-}
-
-.gift-box {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    background: #ff3e60;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: transform 0.3s;
-}
-
-.gift-box:hover {
-    transform: scale(1.05);
-}
-
-.gift-lid {
-    position: absolute;
-    width: 110px;
-    height: 25px;
-    background: #ff5a77;
-    top: -20px;
-    left: -5px;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: transform 0.5s ease-out;
-}
-
-.gift-box.opened .gift-lid {
-    transform: translateY(-80px) rotate(-15deg);
-    opacity: 0;
-}
-
-.gift-body::after {
-    content: '';
-    position: absolute;
-    left: 45px;
-    top: 0;
-    width: 10px;
-    height: 100%;
-    background: #ffffff;
-}
-
-.gift-lid::after {
-    content: '';
-    position: absolute;
-    left: 50px;
-    top: 0;
-    width: 10px;
-    height: 100%;
-    background: #ffffff;
-}
-
-.gift-bow {
-    position: absolute;
-    top: -45px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2.5rem;
-    z-index: 2;
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-}
-
-.gift-box.opened .gift-bow {
-    transform: translate(-50%, -100px) rotate(45deg);
-    opacity: 0;
-}
-
-.gift-label {
-    margin-top: 25px;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-}
-
-/* Sequential scrolling fade-words on gift open */
-#love-messages {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.fade-word {
-    font-size: 2.2rem;
-    font-weight: 300;
-    opacity: 0;
-    transform: translateY(15px);
-    transition: opacity 1.5s ease, transform 1.5s ease;
-}
-
-.fade-word.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Final End Screen elements */
-.final-letter {
-    max-width: 500px;
-    padding: 24px;
-}
-
-.final-title {
-    font-size: 2.6rem;
-    font-weight: 300;
-    margin-bottom: 20px;
-    color: #ffffff;
-}
-
-.final-sub {
-    font-size: 1.8rem;
-    font-weight: 300;
-    margin-bottom: 30px;
-    color: #ffccd5;
-}
-
-.final-signature {
-    font-size: 1.5rem;
-    font-style: italic;
-    color: #ffffff;
-}
-
-/* Standard keyframe sets */
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.animate-float {
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes sway {
-    0% { transform: rotate(-3deg); }
-    100% { transform: rotate(3deg); }
-}
-
-@keyframes flameFlicker {
-    0% { transform: scale(1) rotate(-1deg); }
-    100% { transform: scale(1.1) rotate(2deg); }
-}
-
-@keyframes globalHeartbeat {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.02); }
-    50% { transform: scale(0.99); }
-    75% { transform: scale(1.01); }
-    100% { transform: scale(1); }
-}
-
-@keyframes rotateVinyl {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.animate-pop {
-    animation: fadeIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-.animate-fade-delayed {
-    opacity: 0;
-    animation: fadeIn 1s ease 1s forwards;
-}
-
-/* Next Step Trigger button formatting */
-.next-step-trigger-wrapper {
-    margin-top: 50px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-/* Custom Scrollbar for elegant dark theme */
-.scrollable-step::-webkit-scrollbar {
-    width: 6px;
-}
-
-.scrollable-step::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.scrollable-step::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-}
-
-/* Mobile Optimizations */
-@media (max-width: 600px) {
-    .glow-text { font-size: 1.4rem; }
-    .prompt-text { font-size: 1.8rem; }
-    .surprise-title { font-size: 2.2rem; }
-    .surprise-sub { font-size: 1.1rem; }
-    .section-title { font-size: 1.8rem; }
-    .letter-text { font-size: 1.5rem; }
-    .letter-paper { max-height: 400px; padding: 25px 15px; }
-    .letter-content { font-size: 0.95rem; }
-    .scroller-inner { padding-top: 80px; gap: 100px; }
-    .garden-grid { gap: 20px; }
-    .fade-word { font-size: 1.8rem; }
-    .final-title { font-size: 2rem; }
-    .final-sub { font-size: 1.4rem; }
-}
+// Screen Flow Elements
+const welcomeScreen = document.getElementById('step-welcome');
+const nameScreen = document.getElementById('step-namecheck');
+const surpriseScreen = document.getElementById('step-surprise');
+const mainScroller = document.getElementById('step-main-scroller');
+const giftScreen = document.getElementById('step-gift');
+const endingScreen = document.getElementById('step-ending');
+
+// Interactive Element Selectors
+const btnBegin = document.getElementById('btn-begin');
+const nameInput = document.getElementById('name-input');
+const btnSubmitName = document.getElementById('btn-submit-name');
+const nameError = document.getElementById('name-error');
+const btnToGarden = document.getElementById('btn-to-garden');
+const btnToGift = document.getElementById('btn-to-gift');
+const btnToEnding = document.getElementById('btn-to-ending');
+
+// Audio Controllers
+const bgMusic = document.getElementById('bgMusic');
+const vinylRecord = document.getElementById('vinyl-record');
+const btnMusicToggle = document.getElementById('btn-music-toggle');
+
+// Canvas Setup
+const canvas = document.getElementById('effectsCanvas');
+const ctx = canvas.getContext('2d');
+
+let stars = [];
+let fireflies = [];
+let particles = [];
+let cursorSparkles = [];
+const numStars = 60;
+const numFireflies = 15;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+/* --- INTERACTIVE CANVAS OBJECTS --- */
+
+// Background slow-moving stars
+class Star {
+    constructor() {
+        this.reset();
+        this.y = Math.random() * canvas.height;
+    }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = 0;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speed = Math.random() * 0.12 + 0.03;
+        this.alpha = Math.random();
+        this.twinkleSpeed = Math.random() * 0.015 + 0.005;
+    }
+    update() {
+        this.y += this.speed;
+        if (this.y > canvas.height) this.reset();
+        this.alpha += this.twinkleSpeed;
+        if (this.alpha > 1 || this.alpha < 0.2) {
+            this.twinkleSpeed = -this.twinkleSpeed;
+        }
+    }
+    draw() {
+        ctx.fillStyle = `rgba(220, 220, 225, ${Math.abs(this.alpha)})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+// Gentle fireflies wandering the screen
+class Firefly {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.alpha = Math.random();
+        this.fadeSpeed = Math.random() * 0.01 + 0.005;
+    }
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // Loop boundary coordinates
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+
+        this.alpha += this.fadeSpeed;
+        if (this.alpha > 0.8 || this.alpha < 0.1) {
+            this.fadeSpeed = -this.fadeSpeed;
+        }
+    }
+    draw() {
+        ctx.fillStyle = `rgba(212, 239, 188, ${Math.abs(this.alpha)})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#d4efbc';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0; // reset
+    }
+}
+
+// Generic particle system (Handles popping Hearts & Falling Petals)
+class Particle {
+    constructor(x, y, type) {
+        this.x = x;
+        this.y = y;
+        this.type = type; // 'heart', 'petal', 'sparkle'
+        this.size = type === 'heart' ? Math.random() * 12 + 8 : (type === 'petal' ? Math.random() * 10 + 6 : Math.random() * 3 + 1);
+        this.vx = (Math.random() - 0.5) * (type === 'heart' ? 6 : 2);
+        this.vy = type === 'heart' ? (Math.random() - 1) * 6 : Math.random() * 1.5 + 0.5;
+        this.alpha = 1;
+        this.life = 1;
+        this.decay = Math.random() * 0.015 + 0.005;
+        this.angle = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.02;
+    }
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.angle += this.rotSpeed;
+        this.life -= this.decay;
+        this.alpha = Math.max(0, this.life);
+    }
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.globalAlpha = this.alpha;
+
+        if (this.type === 'heart') {
+            ctx.fillStyle = '#ff3e60';
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.bezierCurveTo(-this.size/2, -this.size/2, -this.size, 0, 0, this.size);
+            ctx.bezierCurveTo(this.size, 0, this.size/2, -this.size/2, 0, 0);
+            ctx.fill();
+        } else if (this.type === 'petal') {
+            ctx.fillStyle = '#ffb3c1';
+            ctx.beginPath();
+            ctx.ellipse(0, 0, this.size/2, this.size, 0, 0, Math.PI * 2);
+            ctx.fill();
+        } else if (this.type === 'sparkle') {
+            ctx.fillStyle = '#ffeb3b';
+            ctx.beginPath();
+            ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.restore();
+    }
+}
+
+// Initializing objects
+for (let i = 0; i < numStars; i++) stars.push(new Star());
+for (let i = 0; i < numFireflies; i++) fireflies.push(new Firefly());
+
+// Dynamic Mouse Interactions tracking
+let lastMousePos = { x: 0, y: 0 };
+window.addEventListener('mousemove', (e) => {
+    lastMousePos.x = e.clientX;
+    lastMousePos.y = e.clientY;
+    
+    // Create cursor sparkles trailing behind
+    if (Math.random() < 0.25) {
+        cursorSparkles.push(new Particle(e.clientX, e.clientY, 'sparkle'));
+    }
+    // Create soft rose petals trailing on motion
+    if (Math.random() < 0.15) {
+        cursorSparkles.push(new Particle(e.clientX, e.clientY, 'petal'));
+    }
+});
+
+// Mobile Touch support sparkles
+window.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    lastMousePos.x = touch.clientX;
+    lastMousePos.y = touch.clientY;
+    if (Math.random() < 0.25) {
+        cursorSparkles.push(new Particle(touch.clientX, touch.clientY, 'sparkle'));
+    }
+});
+
+// Click anywhere to burst hearts
+window.addEventListener('click', (e) => {
+    // Avoid triggering if clicking on layout buttons or overlays
+    if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT' && !e.target.closest('.letter-paper') && !e.target.closest('.glass-message')) {
+        for (let i = 0; i < 8; i++) {
+            particles.push(new Particle(e.clientX, e.clientY, 'heart'));
+        }
+    }
+});
+
+// Primary Render Engine loop
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    stars.forEach(star => { star.update(); star.draw(); });
+    fireflies.forEach(firefly => { firefly.update(); firefly.draw(); });
+    
+    // Update active particle systems
+    particles = particles.filter(p => p.life > 0);
+    particles.forEach(p => { p.update(); p.draw(); });
+
+    cursorSparkles = cursorSparkles.filter(s => s.life > 0);
+    cursorSparkles.forEach(s => { s.update(); s.draw(); });
+
+    requestAnimationFrame(animate);
+}
+animate();
+
+
+/* --- STAGE FLOW AND ROUTING SCRIPT --- */
+
+function switchStep(current, next) {
+    current.style.opacity = '0';
+    setTimeout(() => {
+        current.classList.add('hidden');
+        current.classList.remove('active');
+        
+        next.classList.remove('hidden');
+        // Trigger reflow force to activate transitions
+        next.offsetHeight; 
+        next.classList.add('active');
+        next.style.opacity = '1';
+        
+        // Reset window frame scroll top if transition occurs
+        if (next.classList.contains('scrollable-step')) {
+            next.scrollTop = 0;
+            checkScrollAppearance();
+        }
+    }, 1500);
+}
+
+// Step 1 Welcome Screen -> Step 2 Name Check
+btnBegin.addEventListener('click', () => {
+    switchStep(welcomeScreen, nameScreen);
+});
+
+// Step 2 Name Check validations
+btnSubmitName.addEventListener('click', () => {
+    const inputVal = nameInput.value.trim().toLowerCase();
+    if (inputVal === 'kiya') {
+        nameError.classList.add('hidden');
+        switchStep(nameScreen, surpriseScreen);
+    } else {
+        nameError.classList.remove('hidden');
+        nameError.style.animation = 'none';
+        nameError.offsetHeight; // trigger reflow
+        nameError.style.animation = 'fadeIn 0.5s ease';
+    }
+});
+
+// Allow Enter key in name field
+nameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        btnSubmitName.click();
+    }
+});
+
+// Step 3 Surprise Screen -> Main Scroller Viewport
+btnToGarden.addEventListener('click', () => {
+    switchStep(surpriseScreen, mainScroller);
+    // Play back song instantly when heading into scroll sections
+    tryPlayingMusic();
+});
+
+// Step 4 Scroller -> Final Gift Stage
+btnToGift.addEventListener('click', () => {
+    switchStep(mainScroller, giftScreen);
+});
+
+
+/* --- MAIN INTERACTIVE SECTIONS & CONTROLS --- */
+
+// Audio Controller toggle & spinning animation
+btnMusicToggle.addEventListener('click', () => {
+    if (bgMusic.paused) {
+        bgMusic.play().then(() => {
+            vinylRecord.classList.add('playing');
+            btnMusicToggle.innerHTML = "⏸ Stop music";
+        }).catch(err => {
+            console.log("Audio block details: ", err);
+        });
+    } else {
+        bgMusic.pause();
+        vinylRecord.classList.remove('playing');
+        btnMusicToggle.innerHTML = "▶ Play music";
+    }
+});
+
+function tryPlayingMusic() {
+    bgMusic.play().then(() => {
+        vinylRecord.classList.add('playing');
+        btnMusicToggle.innerHTML = "⏸ Stop music";
+    }).catch(err => {
+        console.log("Interactive playback requires user engagement first.", err);
+    });
+}
+
+// 4A. Scrolling Bloom Animations observer
+const sections = document.querySelectorAll('.journey-section');
+mainScroller.addEventListener('scroll', checkScrollAppearance);
+
+function checkScrollAppearance() {
+    const triggerBottom = window.innerHeight * 0.85;
+    
+    sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < triggerBottom) {
+            sec.classList.add('appeared');
+            
+            // Bloom flowers inside current activated block
+            if (sec.id === 'section-garden') {
+                const flowers = sec.querySelectorAll('.flower-container');
+                flowers.forEach((flower, index) => {
+                    setTimeout(() => {
+                        flower.classList.add('bloomed');
+                    }, index * 400);
+                });
+            }
+        }
+    });
+}
+
+// Flower Click message triggers
+const flowers = document.querySelectorAll('.flower-container');
+const flowerBox = document.getElementById('flower-message-box');
+const flowerTxt = document.getElementById('flower-message-text');
+const closeMsgBtn = document.querySelector('.close-msg');
+
+flowers.forEach(flower => {
+    flower.addEventListener('click', (e) => {
+        if (flower.classList.contains('bloomed')) {
+            const msg = flower.getAttribute('data-message');
+            flowerTxt.innerText = msg;
+            flowerBox.classList.remove('hidden');
+            
+            // Spawn mini hearts directly over tapped bloom
+            const rect = flower.getBoundingClientRect();
+            for (let i = 0; i < 5; i++) {
+                particles.push(new Particle(rect.left + rect.width/2, rect.top + rect.height/3, 'heart'));
+            }
+        }
+    });
+});
+
+closeMsgBtn.addEventListener('click', () => {
+    flowerBox.classList.add('hidden');
+});
+
+// 4B. Interactive Candle blowing system
+const candles = document.querySelectorAll('.candle');
+const wishPrompt = document.getElementById('cake-wish-prompt');
+
+candles.forEach(candle => {
+    candle.addEventListener('click', () => {
+        if (!candle.classList.contains('blown-out')) {
+            candle.classList.add('blown-out');
+            
+            // Sparkle burst effects upon blowing out candles
+            const rect = candle.getBoundingClientRect();
+            for (let i = 0; i < 15; i++) {
+                cursorSparkles.push(new Particle(rect.left + rect.width/2, rect.top, 'sparkle'));
+            }
+            
+            // Check if all flames are blown out
+            const blownOutCount = document.querySelectorAll('.candle.blown-out').length;
+            if (blownOutCount === candles.length) {
+                wishPrompt.classList.remove('hidden');
+            }
+        }
+    });
+});
+
+// 4C. Unfolding Sealed Envelope logic
+const envelopeBtn = document.getElementById('envelope-btn');
+const letterPaper = document.getElementById('letter-paper');
+const closeLetterBtn = document.getElementById('close-letter-btn');
+
+envelopeBtn.addEventListener('click', () => {
+    letterPaper.classList.remove('hidden');
+    // Frame reflow trigger
+    letterPaper.offsetHeight;
+    letterPaper.classList.add('open');
+});
+
+closeLetterBtn.addEventListener('click', () => {
+    letterPaper.classList.remove('open');
+    setTimeout(() => {
+        letterPaper.classList.add('hidden');
+    }, 600);
+});
+
+// 4D. Interactive Memory Sky system
+const skyStars = document.querySelectorAll('.sky-star');
+const skyBox = document.getElementById('sky-message-box');
+const skyTxt = document.getElementById('sky-message-text');
+const closeSkyMsgBtn = document.querySelector('.close-msg-sky');
+
+skyStars.forEach(star => {
+    star.addEventListener('click', (e) => {
+        const thought = star.getAttribute('data-thought');
+        skyTxt.innerText = thought;
+        skyBox.classList.remove('hidden');
+        
+        // Spawn small stars around active element
+        const rect = star.getBoundingClientRect();
+        for (let i = 0; i < 8; i++) {
+            cursorSparkles.push(new Particle(rect.left + rect.width/2, rect.top + rect.height/2, 'sparkle'));
+        }
+    });
+});
+
+closeSkyMsgBtn.addEventListener('click', () => {
+    skyBox.classList.add('hidden');
+});
+
+// 4E. Interactive Heartbeat Hug utility
+const btnSendHug = document.getElementById('btn-send-hug');
+btnSendHug.addEventListener('click', () => {
+    document.body.classList.add('heartbeat-active');
+    
+    // Spawn screen full of bursts
+    const middleX = window.innerWidth / 2;
+    const middleY = window.innerHeight / 2;
+    for (let i = 0; i < 30; i++) {
+        particles.push(new Particle(middleX + (Math.random() - 0.5) * 100, middleY + (Math.random() - 0.5) * 100, 'heart'));
+    }
+
+    setTimeout(() => {
+        document.body.classList.remove('heartbeat-active');
+    }, 800);
+});
+
+
+/* --- STEP 5: FINAL BOX POP SEQUENCE --- */
+
+const giftBoxBtn = document.getElementById('gift-box-btn');
+const giftPrompt = document.getElementById('gift-prompt');
+const loveMessages = document.getElementById('love-messages');
+const words = [
+    document.getElementById('word-choose'),
+    document.getElementById('word-again'),
+    document.getElementById('word-tomorrow'),
+    document.getElementById('word-always')
+];
+
+giftBoxBtn.addEventListener('click', () => {
+    if (!giftBoxBtn.classList.contains('opened')) {
+        giftBoxBtn.classList.add('opened');
+        giftPrompt.style.opacity = '0';
+        
+        // Burst massive hundreds of floating hearts on release!
+        const boxRect = giftBoxBtn.getBoundingClientRect();
+        const startX = boxRect.left + boxRect.width / 2;
+        const startY = boxRect.top;
+        
+        for (let i = 0; i < 150; i++) {
+            setTimeout(() => {
+                particles.push(new Particle(startX, startY, 'heart'));
+            }, i * 15);
+        }
+
+        // Slowly run sequential fade words step sequence
+        setTimeout(() => {
+            giftBoxBtn.style.display = 'none';
+            giftPrompt.style.display = 'none';
+            loveMessages.classList.remove('hidden');
+            
+            // Fading sequential words timing loops
+            words.forEach((word, index) => {
+                setTimeout(() => {
+                    word.classList.add('visible');
+                    
+                    // Spawn side sparkles as words show up
+                    const wordRect = word.getBoundingClientRect();
+                    for(let k = 0; k < 6; k++) {
+                        cursorSparkles.push(new Particle(wordRect.left + (Math.random()*wordRect.width), wordRect.top, 'sparkle'));
+                    }
+                }, index * 1800);
+            });
+
+            // Reveal hidden routing button to slide into Ending Screen
+            setTimeout(() => {
+                btnToEnding.classList.remove('hidden');
+                btnToEnding.style.opacity = '0';
+                btnToEnding.offsetHeight;
+                btnToEnding.style.opacity = '1';
+                
+                // Clicking anywhere on final words area pushes to transition
+                btnToEnding.click();
+            }, (words.length * 1800) + 1200);
+
+        }, 1500);
+    }
+});
+
+btnToEnding.addEventListener('click', () => {
+    switchStep(giftScreen, endingScreen);
+});

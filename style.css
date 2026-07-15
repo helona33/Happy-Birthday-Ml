@@ -1,0 +1,237 @@
+/* Reset & Base Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #0d0d11;
+    color: #e0e0e6;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* Background Stars Canvas */
+#starsCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Screen Transitions */
+.screen {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Welcome Reveal Screen */
+#welcomeScreen {
+    background: radial-gradient(circle at center, #1a1a24 0%, #0d0d11 100%);
+}
+
+.welcome-content {
+    text-align: center;
+    padding: 20px;
+    max-width: 600px;
+}
+
+.mini-moon {
+    font-size: 3rem;
+    animation: float 4s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+.glow-text {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    color: #f0f0f5;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.reveal-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #f0f0f5;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.reveal-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* Main Screen styling */
+#mainScreen {
+    padding: 40px 20px;
+    justify-content: flex-start;
+}
+
+.main-header {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.giant-moon {
+    font-size: 5rem;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.25));
+    animation: float 6s ease-in-out infinite;
+    margin-bottom: 10px;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #f0f0f5;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+    animation: fadeInDown 1.5s ease-out;
+}
+
+/* Cards Area */
+.content-container {
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Glassmorphism Effect */
+.glass-card {
+    background: rgba(35, 35, 40, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Elegant Handwritten Letter Card */
+.letter-card {
+    border-left: 3px solid rgba(255, 255, 255, 0.15);
+}
+
+.letter-text {
+    font-family: 'Caveat', cursive;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: #e5e5eb;
+    letter-spacing: 1px;
+}
+
+/* Wish Card */
+.wish-card {
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: #cccccc;
+}
+
+.wish-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #b3b3b3;
+    font-weight: 300;
+}
+
+/* Floating Music Control Button */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #cccccc;
+    padding: 10px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+/* Elegant Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Friendly Settings */
+@media (max-width: 600px) {
+    .glow-text {
+        font-size: 1.5rem;
+    }
+    .main-title {
+        font-size: 2rem;
+    }
+    .letter-text {
+        font-size: 1.5rem;
+    }
+    .glass-card {
+        padding: 22px;
+    }
+}
